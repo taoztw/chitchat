@@ -1,0 +1,36 @@
+2021-05-14 01:47:17,128 - INFO - using device:cpu
+2021-05-14 01:47:19,515 - INFO - model config:
+{
+  "attn_pdrop": 0.1,
+  "embd_pdrop": 0.1,
+  "finetuning_task": null,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "n_ctx": 300,
+  "n_embd": 768,
+  "n_head": 12,
+  "n_layer": 10,
+  "n_positions": 300,
+  "num_labels": 1,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "resid_pdrop": 0.1,
+  "summary_activation": null,
+  "summary_first_dropout": 0.1,
+  "summary_proj_to_labels": true,
+  "summary_type": "cls_index",
+  "summary_use_proj": true,
+  "torchscript": false,
+  "use_bfloat16": false,
+  "vocab_size": 13317
+}
+
+2021-05-14 01:47:19,517 - INFO - tokenizing raw data,raw data path:E:\nmt\GPT2-chitchat-master\data\data.txt, token output path:E:\nmt\GPT2-chitchat-master\data\data_token.txt
+2021-05-14 01:47:19,517 - INFO - there are 42 dialogue in raw dataset
+2021-05-14 01:47:19,570 - INFO - finish preprocessing raw data,the result is stored in E:\nmt\GPT2-chitchat-master\data\data_token.txt
+2021-05-14 01:47:19,584 - INFO - number of model parameters: 81338112
+2021-05-14 01:47:19,585 - INFO - loading traing data
+2021-05-14 01:47:19,691 - INFO - total training steps = 103
+2021-05-14 01:47:19,694 - INFO - starting training

@@ -1,0 +1,186 @@
+2021-04-30 00:03:16,414 - INFO - using device:cpu
+2021-04-30 00:08:06,580 - INFO - using device:cpu
+2021-04-30 00:08:08,754 - INFO - model config:
+{
+  "activation_function": "gelu_new",
+  "architectures": [
+    "GPT2LMHeadModel"
+  ],
+  "attn_pdrop": 0.1,
+  "embd_pdrop": 0.1,
+  "finetuning_task": null,
+  "gradient_checkpointing": false,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "model_type": "gpt2",
+  "n_ctx": 1024,
+  "n_embd": 768,
+  "n_head": 12,
+  "n_inner": null,
+  "n_layer": 6,
+  "n_positions": 1024,
+  "num_labels": 1,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "resid_pdrop": 0.1,
+  "summary_activation": null,
+  "summary_first_dropout": 0.1,
+  "summary_proj_to_labels": true,
+  "summary_type": "cls_index",
+  "summary_use_proj": true,
+  "task_specific_params": {
+    "text-generation": {
+      "do_sample": true,
+      "max_length": 400
+    }
+  },
+  "tokenizer_class": "BertTokenizer",
+  "torchscript": false,
+  "use_bfloat16": false,
+  "vocab_size": 21128
+}
+
+2021-04-30 00:08:08,756 - INFO - tokenizing raw data,raw data path:data/train.txt, token output path:data/train_tokenized.txt
+2021-04-30 00:08:14,758 - INFO - there are 7350507 dialogue in raw dataset
+2021-04-30 09:41:36,203 - INFO - using device:cpu
+2021-04-30 09:41:38,025 - INFO - model config:
+{
+  "activation_function": "gelu_new",
+  "architectures": [
+    "GPT2LMHeadModel"
+  ],
+  "attn_pdrop": 0.1,
+  "embd_pdrop": 0.1,
+  "finetuning_task": null,
+  "gradient_checkpointing": false,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "model_type": "gpt2",
+  "n_ctx": 1024,
+  "n_embd": 768,
+  "n_head": 12,
+  "n_inner": null,
+  "n_layer": 6,
+  "n_positions": 1024,
+  "num_labels": 1,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "resid_pdrop": 0.1,
+  "summary_activation": null,
+  "summary_first_dropout": 0.1,
+  "summary_proj_to_labels": true,
+  "summary_type": "cls_index",
+  "summary_use_proj": true,
+  "task_specific_params": {
+    "text-generation": {
+      "do_sample": true,
+      "max_length": 400
+    }
+  },
+  "tokenizer_class": "BertTokenizer",
+  "torchscript": false,
+  "use_bfloat16": false,
+  "vocab_size": 21128
+}
+
+2021-04-30 09:41:38,029 - INFO - tokenizing raw data,raw data path:data/train.txt, token output path:data/train_tokenized.txt
+2021-04-30 09:41:43,891 - INFO - there are 7350507 dialogue in raw dataset
+2021-04-30 15:29:48,555 - INFO - using device:cpu
+2021-04-30 15:29:50,032 - INFO - model config:
+{
+  "activation_function": "gelu_new",
+  "architectures": [
+    "GPT2LMHeadModel"
+  ],
+  "attn_pdrop": 0.1,
+  "embd_pdrop": 0.1,
+  "finetuning_task": null,
+  "gradient_checkpointing": false,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "model_type": "gpt2",
+  "n_ctx": 1024,
+  "n_embd": 768,
+  "n_head": 12,
+  "n_inner": null,
+  "n_layer": 6,
+  "n_positions": 1024,
+  "num_labels": 1,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "resid_pdrop": 0.1,
+  "summary_activation": null,
+  "summary_first_dropout": 0.1,
+  "summary_proj_to_labels": true,
+  "summary_type": "cls_index",
+  "summary_use_proj": true,
+  "task_specific_params": {
+    "text-generation": {
+      "do_sample": true,
+      "max_length": 400
+    }
+  },
+  "tokenizer_class": "BertTokenizer",
+  "torchscript": false,
+  "use_bfloat16": false,
+  "vocab_size": 21128
+}
+
+2021-04-30 15:29:50,033 - INFO - tokenizing raw data,raw data path:data/train.txt, token output path:data/train_tokenized.txt
+2021-04-30 15:29:50,586 - INFO - there are 500001 dialogue in raw dataset
+2021-04-30 15:30:58,541 - INFO - finish preprocessing raw data,the result is stored in data/train_tokenized.txt
+2021-04-30 15:30:58,548 - INFO - number of model parameters: 59541504
+2021-04-30 15:30:58,548 - INFO - loading traing data
+2021-04-30 15:30:59,011 - INFO - total training steps = 1250000
+2021-04-30 15:30:59,012 - INFO - starting training
+2021-04-30 15:36:44,321 - INFO - using device:cpu
+2021-04-30 15:36:45,751 - INFO - model config:
+{
+  "activation_function": "gelu_new",
+  "architectures": [
+    "GPT2LMHeadModel"
+  ],
+  "attn_pdrop": 0.1,
+  "embd_pdrop": 0.1,
+  "finetuning_task": null,
+  "gradient_checkpointing": false,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "model_type": "gpt2",
+  "n_ctx": 1024,
+  "n_embd": 768,
+  "n_head": 12,
+  "n_inner": null,
+  "n_layer": 6,
+  "n_positions": 1024,
+  "num_labels": 1,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "resid_pdrop": 0.1,
+  "summary_activation": null,
+  "summary_first_dropout": 0.1,
+  "summary_proj_to_labels": true,
+  "summary_type": "cls_index",
+  "summary_use_proj": true,
+  "task_specific_params": {
+    "text-generation": {
+      "do_sample": true,
+      "max_length": 400
+    }
+  },
+  "tokenizer_class": "BertTokenizer",
+  "torchscript": false,
+  "use_bfloat16": false,
+  "vocab_size": 21128
+}
+
+2021-04-30 15:36:45,752 - INFO - tokenizing raw data,raw data path:data/train.txt, token output path:data/train_tokenized.txt
+2021-04-30 15:36:46,262 - INFO - there are 500001 dialogue in raw dataset

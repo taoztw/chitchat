@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>TZ-聊天机器人</title>
+<link rel="stylesheet" type="text/css" href="font_Icon/iconfont.css">
+<link rel="stylesheet" type="text/css" href="css/chat.css">
+
+</head>
+<body>
+
+<div class="chatContainer">
+    <div class="chatBox" ref="chatBox">
+        <div class="chatBox-head">
+            <div class="chatBox-head-one">
+                多轮闲聊对话系统V1
+            </div>
+        </div>
+        <div class="chatBox-info">
+            <div class="chatBox-kuang" ref="chatBoxkuang" style="height: 495px; display: block;">
+                <div class="chatBox-content">
+                    <div class="chatBox-content-demo" id="chatBox-content-demo">
+
+                        <div class="clearfloat">
+                            <div class="left">
+                                <div class="chat-avatars"><img src="img/icon01.png" alt="头像"></div>
+                                <div class="chat-message">
+                                    你好，我是机器人T，很高兴跟你唠会。
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="chatBox-send">
+                    <div class="div-textarea" contenteditable="true"></div>
+                    <div>
+                        <button id="chat-fasong" class="btn-default-styles"><i class="iconfont icon-fasong"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="formcss" style="margin-left: 80px; margin-top: 60px;">
+<form method="POST" id="form1" onsubmit="return false" action="##">
+    Max_History_Len:<br>
+    <input type="text" name="max_history_len"><br>
+    Max_Len: <br>
+    <input type="text" name="max_len"><br>
+    Repetition_Penalty: <br>
+    <input type="text" name="repetition_penalty"><br>
+    Temperature: <br>
+    <input type="text" name="temperature"><br>
+    Topk:<br>
+    <input type="text" name="topk"><br>
+    Topp: <br>
+    <input type="text" name="topp"><br>
+    <input type="submit" value="设置参数" onclick="parameter()">
+</form></div>
+
+<script src="js/jquery.min.js"></script>
+<script>
+    function parameter() {
+        console.log($('#form1').serializeArray())
+        var formObject = {};
+        var formArray = $("#form1").serializeArray();
+        $.each(formArray, function (i, item) {
+            formObject[item.name] = item.value;
+        });
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "http://127.0.0.1:5005/v1/chat/parameter" ,//url
+                contentType: 'application/json',
+                data: JSON.stringify(formObject),
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+                        alert(result.msg);
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        };
+
+    screenFuc();
+    function screenFuc() {
+        var topHeight = $(".chatBox-head").innerHeight();//聊天头部高度
+        //屏幕小于768px时候,布局change
+        var winWidth = $(window).innerWidth();
+        if (winWidth <= 768) {
+            var totalHeight = $(window).height(); //页面整体高度
+            $(".chatBox-info").css("height", totalHeight - topHeight);
+            var infoHeight = $(".chatBox-info").innerHeight();//聊天头部以下高度
+            //中间内容高度
+            $(".chatBox-content").css("height", infoHeight - 46);
+            $(".chatBox-content-demo").css("height", infoHeight - 46);
+
+            $(".chatBox-list").css("height", totalHeight - topHeight);
+            $(".chatBox-kuang").css("height", totalHeight - topHeight);
+            $(".div-textarea").css("width", winWidth - 42);
+        } else {
+            $(".chatBox-info").css("height", 525);
+            $(".chatBox-content").css("height", 448);
+            $(".chatBox-content-demo").css("height", 478);
+            $(".chatBox-list").css("height", 495);
+            $(".chatBox-kuang").css("height", 495);
+            $(".div-textarea").css("width", 328);
+        }
+    }
+    (window.onresize = function () {
+        screenFuc();
+    })();
+
+    // 按回车键发送
+    $(".div-textarea").keydown(function(event){
+        if(event.keyCode ==13){
+            sendMessage();
+            //禁止换行
+            return false;
+        }
+    });
+
+    //      发送信息
+    $("#chat-fasong").click(function () {
+        sendMessage();
+    });
+
+    //      发送信息
+    function sendMessage(){
+        var textContent = $(".div-textarea").html().replace(/[\n\r]/g, '<br>')
+        if (textContent != "") {
+            $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                "<div class=\"author-name\"><small class=\"chat-date\">"+getTime()+"</small> </div> " +
+                "<div class=\"right\"> <div class=\"chat-message\"> " + textContent + " </div> " +
+                "<div class=\"chat-avatars\"><img src=\"img/icon02.png\" alt=\"头像\" /></div> </div> </div>");
+            //发送后清空输入框
+            $(".div-textarea").html("");
+            //聊天框默认最底部
+            $(document).ready(function () {
+                $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+            });
+
+            $.ajax({
+            type:"POST",
+            url:"http://127.0.0.1:5005/v1/chat",
+            data: JSON.stringify({text: textContent}),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            timeout : 10000, //超时时间设置，单位毫秒
+            // dataType:"html",
+            success:function(result){
+                // alert(result.msg)
+                getMessage(result.msg);
+            },
+            error:function(jqXHR){
+                console.log("Error: "+jqXHR.status);
+            }
+        });
+            
+        }
+    }
+
+    function getMessage(result){
+        var textContent = $(".div-textarea").html().replace(/[\n\r]/g, '<br>')
+        $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+            "<div class=\"author-name\"><small class=\"chat-date\">"+getTime()+"</small> </div> " +
+            "<div class=\"left\"> <div class=\"chat-avatars\"><img src=\"img/icon01.png\" alt=\"头像\" /></div>" +
+            "<div class=\"chat-message\"> " + result + " </div>  </div> </div>");
+        //发送后清空输入框
+        $(".div-textarea").html("");
+        //聊天框默认最底部
+        $(document).ready(function () {
+            $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+        });
+    }
+
+    function getTime() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
+</script>
+
+</body>
+</html>
+

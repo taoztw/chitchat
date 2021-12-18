@@ -1,0 +1,83 @@
+## Where the samples will be written
+save_data: run/
+## Where the vocab(s) will be written
+src_vocab: run/example.vocab.src
+tgt_vocab: run/example.vocab.tgt
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts:
+data:
+    corpus:
+        path_src: en.txt
+        path_tgt: zh.txt
+        transforms: none
+    valid:
+        path_src: valid_en.txt
+        path_tgt: valid_cn.txt
+        transforms: none
+
+src_subword_type: bpe
+tgt_subword_type: bpe
+src_subword_model: en_bpe.model
+tgt_subword_model: zh_bpe.model
+
+src_subword_nbest: 1
+src_subword_alpha: 0.0
+tgt_subword_nbest: 1
+tgt_subword_alpha: 0.0
+
+src_seq_length: 250
+tgt_seq_length: 250
+
+# General opts
+save_model: en2cn
+save_checkpoint_steps: 10000
+valid_steps: 10000
+train_steps: 200000
+
+# Batching
+queue_size: 10000
+bucket_size: 4096
+world_size: 1
+gpu_ranks: [0]
+batch_type: "tokens"
+batch_size: 512
+valid_batch_size: 8
+max_generator_batches: 2
+accum_count: [4]
+accum_steps: [0]
+
+# Optimization
+model_dtype: "fp32"
+optim: "adam"
+learning_rate: 2
+warmup_steps: 8000
+decay_method: "noam"
+adam_beta2: 0.998
+max_grad_norm: 0
+label_smoothing: 0.1
+param_init: 0
+param_init_glorot: true
+normalization: "tokens"
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+position_encoding: true
+enc_layers: 6
+dec_layers: 6
+heads: 8
+rnn_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout_steps: [0]
+dropout: [0.1]
+attention_dropout: [0.1]
+
+# visualization
+tensorboard: True
+tensorboard_log_dir: /data-output
+
+log_file: log.txt
+log_file_level: 20
